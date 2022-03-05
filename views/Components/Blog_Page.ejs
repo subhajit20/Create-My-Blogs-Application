@@ -1,0 +1,22 @@
+<%- include("./Header") %>
+    <div class="container my-5">
+
+        <div class="form-floating">
+            <form action="/submit" method="post" id="myForm" enctype="multipart/form-data">
+                <div class="alert alert-success alert-dismissible fade show blog-error" role="alert">
+                    <strong class="blog-error"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <label for="floatingTextarea2">
+                    <h2>Create Your Beautiful Blogs!</h2>
+                </label>
+                <textarea class="form-control myTextarea" name="blog" placeholder="Write your blog here"
+                    id="floatingTextarea2" style="height: 200px"></textarea>
+                <div class="col-12 my-5">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button type="submit" class="btn btn-primary clear">Clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include("./Footer") %>

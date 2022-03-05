@@ -1,0 +1,41 @@
+<script>
+
+    const sigupform = document.querySelector("#loginform");
+    const alert = document.querySelector(".alert");
+
+
+
+    sigupform.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formdata = new FormData(sigupform);
+
+        const response = await fetch("/login", {
+            method: "POST",
+            body: formdata
+        });
+
+        const result = await response.json();
+        if (response.status === 200) {
+            alert.innerHTML = result.successfull.msg + `,<h5>Thank You!<br> Wait a second</h5>`;
+            alert.classList.add("show");
+            alert.classList.remove("disable");
+
+            setTimeout(() => {
+                alert.classList.remove("show");
+                alert.classList.add("disable");
+                window.location = "/home"
+            }, 1000)
+        } else if (response.status === 500) {
+            Object.keys(result.errors).forEach((x) => {
+                const documents = document.querySelector(`.${x}`);
+                documents.innerHTML = result.errors[x].msg
+
+
+                setTimeout(() => {
+                    documents.innerHTML = null
+                }, 2000)
+            })
+        }
+    })
+
+</script>

@@ -1,0 +1,54 @@
+<%- include("./Header") %>
+    <figure class="text-center">
+        <blockquote class="blockquote">
+        </blockquote>
+        <h1 class="blockquote-footer">
+            Your Blogs
+        </h1>
+    </figure>
+    <div id="blogs">
+    </div>
+    <script>
+
+        /**
+     *  Getall blogs by fetching rest api "/allBlog"
+     *
+    */
+
+        const blogs = document.getElementById("blogs");
+
+
+        window.onload = async () => {
+
+            const response = await fetch("/allBlog");
+            const result = await response.json();
+
+            if (response.status === 200) {
+
+                const data = result.data;
+                let html = ``;
+                for (let i = 0; i < data.length; i++) {
+                    html += `
+                        <div class="card text-white bg-primary container mb-2" style="max-width: 28rem;">
+            <div class="card-header">Time : ${data[i].mydate}</div>
+            <div class="card-body">
+                <h5 class="card-title" >#${i + 1} Blog</h5>
+                <h3 class="card-text my-5">${data[i].blog}</h3>
+                    <a href="/del/${data[i]._id}" class="btn my-2 btn-danger btn-lg " tabindex="-1" role="button" aria-disabled="true">Delete This Blog</a>
+            </div>
+        </div>
+                            `;
+                }
+                blogs.innerHTML = html;
+            } else if (response.status === 500) {
+                let html = `
+                < h5 class="card-title" >No Blogs is Created</h5 >
+                `;
+                blogs.innerHTML = html;
+            }
+        }
+    </script>
+
+    </body>
+
+    </html>

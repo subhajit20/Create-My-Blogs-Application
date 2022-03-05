@@ -1,0 +1,45 @@
+<script>
+    const sigupform = document.querySelector("#sigupform");
+    const error = document.querySelectorAll(".error");
+    const alert = document.querySelector(".alert");
+    const myUsername = document.querySelector(".username1");
+    const myEmail = document.querySelector(".email1");
+    const myPass = document.querySelector(".password1");
+
+
+    sigupform.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formdata = new FormData(sigupform);
+
+        const response = await fetch("/", {
+            method: "POST",
+            body: formdata
+        });
+
+        const result = await response.json();
+        if (response.status === 200) {
+            alert.innerHTML = result.successfull.msg + ",Thank You!";
+            alert.classList.add("show");
+            alert.classList.remove("disable");
+
+            myUsername.value = "";
+            myEmail.value = "";
+            myPass.value = "";
+
+            setTimeout(() => {
+                alert.classList.remove("show");
+                alert.classList.add("disable");
+            }, 3000)
+        } else if (response.status === 500) {
+            Object.keys(result.errors).forEach((x) => {
+                const documents = document.querySelector(`.${x}`);
+                documents.innerText = result.errors[x].msg;
+
+
+                setTimeout(() => {
+                    documents.innerHTML = null
+                }, 2000)
+            })
+        }
+    })
+</script>
