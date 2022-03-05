@@ -45,7 +45,7 @@ async function deleteBlog(req, res) {
 
 async function allBlogPage(req, res) {
     try {
-        res.status(200).render("./components/AllBlogs")
+        res.status(200).render("AllBlogs")
     } catch (err) {
         res.status(500).json({
             error: {
