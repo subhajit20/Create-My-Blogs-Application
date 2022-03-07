@@ -17,6 +17,8 @@
     const myDiv = document.querySelector(".blog-error");
     const myTextarea = document.querySelector(".myTextarea");
 
+    myTextarea.style.fontSize = "2rem";
+
     myForm.onsubmit = async (e) => {
         e.preventDefault();
 
@@ -62,6 +64,42 @@
         myTextarea.value = "";
     })
 
+    const d = window.body;
+    const dark = document.querySelector(".dark_mode");
+    let container = document.querySelector(".myBody");
+    let heading = document.querySelector(".heading");
+    let nav_bg = document.querySelector(".bg-light");
+    let nav_col = document.querySelector(".navbar-light");
+    let target = document.querySelector(".target");
+    let flag = true;
+
+    dark.addEventListener("click", (e) => {
+        if (flag) {
+            target.style.color = "#FBFFFE";
+            target.innerHTML = "Dark Mode";
+            container.style.backgroundColor = "#30343F";
+            myTextarea.style.backgroundColor = "#30343F";
+            myTextarea.style.color = "#FBFFFE";
+            heading.style.color = "#FBFFFE";
+            nav_bg.classList.remove("bg-light");
+            nav_bg.classList.add("bg-dark");
+            nav_col.classList.remove("navbar-light");
+            nav_col.classList.add("navbar-dark");
+            flag = false;
+        } else if (flag == false) {
+            container.style.backgroundColor = "#FBFFFE";
+            myTextarea.style.backgroundColor = "#FBFFFE";
+            myTextarea.style.color = "#30343F";
+            heading.style.color = "#30343F";
+            nav_bg.classList.add("bg-light");
+            nav_bg.classList.remove("bg-dark");
+            nav_col.classList.add("navbar-light");
+            nav_col.classList.remove("navbar-dark");
+            target.style.color = "#30343F";
+            target.innerHTML = "Light Mode";
+            flag = true;
+        }
+    })
 </script>
 </body>
 
